@@ -14,10 +14,14 @@ import { useReRender } from "./useReRender";
 
 export function useRenderOnUpdateService(
   ServiceInstance,
-  updateEvent = "onUpdate"
+  updateEvent = "onUpdate",
+  callback = null
 ) {
   const reRender = useReRender();
   ServiceInstance[updateEvent] = function () {
     reRender();
+    if (typeof callback === "function") {
+      callback();
+    }
   };
 }

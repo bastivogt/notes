@@ -21,10 +21,18 @@ function App() {
     setRenderUpdate({ ...renderUpdate });
   };*/
 
-  useRenderOnUpdateService(NotesServiceInstance);
+  useRenderOnUpdateService(NotesServiceInstance, "onUpdate", () => {
+    NotesServiceInstance.save();
+  });
 
   useEffect(() => {
-    NotesServiceInstance.notes = mockData;
+    //NotesServiceInstance.notes = mockData;
+    let loadedNotes = NotesServiceInstance.load();
+    if (loadedNotes === null) {
+      loadedNotes = [];
+    }
+    NotesServiceInstance.notes = loadedNotes;
+
     console.log(NotesServiceInstance.notes);
     console.log(NotesServiceInstance.getNoteByID(2));
     console.log("MOUNT");

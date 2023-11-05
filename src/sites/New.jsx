@@ -17,8 +17,9 @@ export default function New() {
       //newText = nl2br(newText);
 
       let newTitle = stripTags(title);
-      NotesServiceInstance.addNote(new Date().getTime(), newTitle, newText);
-      navigate("/");
+      const id = new Date().getTime();
+      NotesServiceInstance.addNote(id, newTitle, newText);
+      navigate(`/detail/${id}`);
     } else {
       alert("ERROR");
     }
@@ -67,10 +68,10 @@ export default function New() {
         </Card.Body>
         <Card.Footer>
           <NavLink to="/" className="btn btn-primary mx-1">
-            Back
+            Overview
           </NavLink>
           <button onClick={createHandler} className="btn btn-primary mx-1">
-            Create new
+            Save
           </button>
         </Card.Footer>
       </Card>

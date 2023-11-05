@@ -56,4 +56,13 @@ export class NotesService extends Service {
     }
     return this._notes.sort((a, b) => b.updatedAt - a.updatedAt);
   }
+
+  save() {
+    window.localStorage.setItem("NOTES", JSON.stringify(this.notes));
+  }
+
+  load() {
+    const notes = JSON.parse(window.localStorage.getItem("NOTES"));
+    return notes;
+  }
 }
