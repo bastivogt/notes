@@ -31,8 +31,8 @@ export default function New() {
 
   return (
     <>
-      <Card>
-        <Card.Header>
+      <Card className="border-success">
+        <Card.Header className="text-success">
           <h5>New note</h5>
         </Card.Header>
         <Card.Body>

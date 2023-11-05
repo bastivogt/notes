@@ -46,8 +46,8 @@ export default function Edit() {
 
   return (
     <>
-      <Card>
-        <Card.Header>
+      <Card className="border-primary">
+        <Card.Header className="text-primary">
           <h5>
             [EDIT] {note.title} [#{note.id}]
           </h5>

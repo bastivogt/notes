@@ -35,7 +35,7 @@ export default function All() {
   }
   return (
     <>
-      <NavLink to="/new" className="btn btn-primary btn-lg mb-4">
+      <NavLink to="/new" className="btn btn-success btn-lg mb-4">
         +
       </NavLink>
       {NotesServiceInstance.notes.length > 0 ? (
