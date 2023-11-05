@@ -13,7 +13,7 @@ export default function Detail() {
   const navigate = useNavigate();
 
   //const text = note.text.split("\n").join("<br />");
-  const text = replacer(note.text);
+  //const text = replacer(note.text);
 
   function editHandler() {
     navigate(`/edit/${id}`);
@@ -29,7 +29,7 @@ export default function Detail() {
         </Card.Header>
 
         <Card.Body>
-          <p dangerouslySetInnerHTML={{ __html: text }}></p>
+          <p dangerouslySetInnerHTML={{ __html: note.text }}></p>
         </Card.Body>
         <Card.Footer>
           <div>

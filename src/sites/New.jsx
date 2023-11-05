@@ -4,21 +4,21 @@ import NotesServiceInstance from "../services/NoteServiceInstance";
 import Card from "../components/Card";
 import { nl2br, stripDoubleN, stripTags } from "../helper/functions";
 
+import MyEditor from "../components/MyEditor";
+
 export default function New() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const navigate = useNavigate();
 
+  const [html, setHtml] = useState("");
+
   function createHandler() {
     console.log("CREATE_HANDLER");
-    if (title !== "" && text !== "") {
-      let newText = stripTags(text);
-      newText = stripDoubleN(newText);
-      //newText = nl2br(newText);
-
+    if (title !== "" && html !== "") {
       let newTitle = stripTags(title);
       const id = new Date().getTime();
-      NotesServiceInstance.addNote(id, newTitle, newText);
+      NotesServiceInstance.addNote(id, newTitle, html);
       navigate(`/detail/${id}`);
     } else {
       alert("ERROR");
@@ -27,10 +27,6 @@ export default function New() {
 
   function titleChangeHandler(evt) {
     setTitle(evt.target.value);
-  }
-
-  function textChangeHandler(evt) {
-    setText(evt.target.value);
   }
 
   return (
@@ -56,14 +52,10 @@ export default function New() {
             <label className="form-label" htmlFor="input-text">
               Text
             </label>
-            <textarea
-              className="form-control font-monospace"
-              id="input-text"
-              cols="30"
-              rows="10"
-              value={text}
-              onChange={textChangeHandler}
-            ></textarea>
+            <MyEditor
+              value={html}
+              onChange={(evt) => setHtml(evt.target.value)}
+            ></MyEditor>
           </div>
         </Card.Body>
         <Card.Footer>

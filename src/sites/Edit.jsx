@@ -3,6 +3,8 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import NotesServiceInstance from "../services/NoteServiceInstance";
 import { nl2br, stripDoubleN, stripTags } from "../helper/functions";
 
+import MyEditor from "../components/MyEditor";
+
 import Card from "../components/Card";
 
 export default function Edit() {
@@ -13,6 +15,8 @@ export default function Edit() {
 
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
+
+  const [html, setHtml] = useState(note.text);
 
   console.log("EDIT PAGE ID", id);
   console.log("Note", note);
@@ -33,7 +37,7 @@ export default function Edit() {
 
       let newTitle = stripTags(title);
 
-      NotesServiceInstance.updateNote(id, newTitle, newText);
+      NotesServiceInstance.updateNote(id, newTitle, html);
       navigate(`/detail/${id}`);
     } else {
       alert("ERROR");
@@ -65,14 +69,10 @@ export default function Edit() {
             <label className="form-label" htmlFor="input-text">
               Text
             </label>
-            <textarea
-              className="form-control font-monospace"
-              id="input-text"
-              cols="30"
-              rows="10"
-              value={text}
-              onChange={textChangeHandler}
-            ></textarea>
+            <MyEditor
+              value={html}
+              onChange={(evt) => setHtml(evt.target.value)}
+            ></MyEditor>
           </div>
         </Card.Body>
         <Card.Footer>
